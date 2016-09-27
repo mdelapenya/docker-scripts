@@ -7,9 +7,16 @@ then
         WHEN="week"
 fi
 
-echo "Cleaning up obsolete containers..."
+EXCLUDED=${2}
 
-CONTAINER_IDS=($(docker ps -a | grep "Exit" | grep "$WHEN" | awk '{print $1}'))
+if [[ -z "$EXCLUDED" ]]
+then
+        EXCLUDED="registry"
+fi
+
+echo "Cleaning up obsolete containers ($EXCLUDED cannot be deleted this way)..."
+
+CONTAINER_IDS=($(docker ps -a | grep -v "$EXCLUDED" | grep "Exit" | grep "$WHEN" | awk '{print $1}'))
 
 for CONTAINER_ID in "${CONTAINER_IDS[@]}"
 do
