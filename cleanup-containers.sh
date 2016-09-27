@@ -16,7 +16,7 @@ fi
 
 echo "Cleaning up obsolete containers ($EXCLUDED cannot be deleted this way)..."
 
-CONTAINER_IDS=($(docker ps -a | grep -v "$EXCLUDED" | grep "Exited (" | awk '{print $1,$5,$6}' | grep "$WHEN"))
+CONTAINER_IDS=($(docker ps -a | grep -v "$EXCLUDED" | grep "Exited (" | awk '{print $1,$10,$11}' | grep "$WHEN"))
 
 for CONTAINER_ID in "${CONTAINER_IDS[@]}"
 do
