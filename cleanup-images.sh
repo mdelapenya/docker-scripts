@@ -9,7 +9,7 @@ fi
 
 echo "Cleaning up untagged images..."
 
-IMAGE_IDS=($(docker images | grep "<none>" | grep "$WHEN" | awk '{print $3}'))
+IMAGE_IDS=($(docker images | grep "<none>" | awk '{print $3,$4,$5}' | grep "$WHEN" | awk '{print $1}'))
 
 for IMAGE_ID in "${IMAGE_IDS[@]}"
 do
