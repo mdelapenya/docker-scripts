@@ -7,7 +7,7 @@ then
         WHEN="week"
 fi
 
-echo "Cleaning up obsolet containers..."
+echo "Cleaning up obsolete containers..."
 
 CONTAINER_IDS=($(docker ps -a | grep "Exit" | grep "$WHEN" | awk '{print $1}'))
 
