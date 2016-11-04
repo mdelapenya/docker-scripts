@@ -69,19 +69,3 @@ do
 		docker rmi $IMAGE_ID
 	fi
 done
-
-#
-# Remove those images with no repository and no tag
-#
-IMAGE_IDS=($(docker images | grep "<none>" | awk '{print $1 $2 " " $3}' | grep "<none><none>" | awk '{print $2}'))
-
-for IMAGE_ID in "${IMAGE_IDS[@]}"
-do
-        echo "Removing unlinked image with imageId: $IMAGE_ID"
-
-	if [ "$DEBUG" = true ]; then
-		echo "docker rmi $IMAGE_ID"
-	else
-		docker rmi $IMAGE_ID
-	fi
-done
