@@ -53,6 +53,8 @@ do
 	esac
 done
 
+validate_image
+
 echo "Cleaning up images for $IMAGE on $WHEN..."
 
 IMAGE_IDS=($(docker images | grep "$IMAGE" | grep "$WHEN" | awk '{print $1":"$2}'))
