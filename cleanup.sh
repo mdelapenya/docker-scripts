@@ -58,7 +58,7 @@ validate_image
 ./cleanup-containers.sh $WHEN
 
 if [ "$DEBUG" = true ]; then
-  ./cleanup-images.sh -d -i $IMAGE -w $WHEN
+  ./cleanup-images.sh -d -i $IMAGE -w "$WHEN"
 else
-  ./cleanup-images.sh -i $IMAGE -w $WHEN
+  ./cleanup-images.sh -i $IMAGE -w "$WHEN"
 fi
