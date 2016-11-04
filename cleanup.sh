@@ -59,6 +59,10 @@ validate_image
 
 if [ "$DEBUG" = true ]; then
   ./cleanup-images.sh -d -i $IMAGE -w "$WHEN"
+
+  ./cleanup-orphan-images.sh -d
 else
   ./cleanup-images.sh -i $IMAGE -w "$WHEN"
+
+  ./cleanup-orphan-images.sh
 fi
