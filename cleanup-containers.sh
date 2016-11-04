@@ -1,18 +1,47 @@
 #!/bin/bash
 
-WHEN=${1}
+EXCLUDED="registry"
+WHEN="2 weeks"
 
-if [[ -z "$WHEN" ]]
-then
-        WHEN="week"
-fi
+usage() {
+	echo "Please use this program with following input parameters:"
+	echo "	[-d|--debug]: Prints commands in the output"
+	echo "	[-h|--help]: Prints this usage message"
+	echo "	[-w|--when PATTERN]: Define the time range to delete the containers. If no value is set '2 weeks' will be used"
+  echo "	[-x|--excluded CONTAINER NAME]: Define which container name should be excluded from deletion. By default, registry will be never deleted"
+}
 
-EXCLUDED=${2}
+while :
+do
+	case "$1" in
+		-d | --debug)
+			DEBUG=true
 
-if [[ -z "$EXCLUDED" ]]
-then
-        EXCLUDED="registry"
-fi
+			shift
+			;;
+		-h | --help)
+			usage
+			exit 0
+			;;
+		-w | --when)
+			WHEN="$2"
+
+			shift 2
+			;;
+		-x | --excluded)
+			EXCLUDED="$2"
+
+			shift 2
+			;;
+		-* | --*) # End of all options
+			usage
+			exit 1
+			;;
+		*)
+			break
+			;;
+	esac
+done
 
 echo "Cleaning up obsolete containers ($EXCLUDED cannot be deleted this way)..."
 
@@ -20,6 +49,11 @@ CONTAINER_IDS=($(docker ps -a | grep -v "$EXCLUDED" | grep "Exited (" | grep "$W
 
 for CONTAINER_ID in "${CONTAINER_IDS[@]}"
 do
-        echo "Removing container with containerId: $CONTAINER_ID"
-        docker rm $CONTAINER_ID
+	echo "Removing container with containerId: $CONTAINER_ID"
+
+	if [ "$DEBUG" = true ]; then
+		echo "docker rm $CONTAINER_ID"
+	else
+		docker rm $CONTAINER_ID
+	fi
 done
