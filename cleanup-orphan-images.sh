@@ -4,7 +4,7 @@ DEBUG=false
 
 usage() {
 	echo "Please use this program with following input parameters:"
-	echo "	[-d|--debug]: Prints commands in the output"
+	echo "	[-d|--debug]: Prints commands in the output instead of executing it"
 	echo "	[-h|--help]: Prints this usage message"
 }
 

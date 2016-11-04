@@ -5,7 +5,7 @@ WHEN="2 weeks"
 
 usage() {
 	echo "Please use this program with following input parameters:"
-	echo "	[-d|--debug]: Prints commands in the output"
+	echo "	[-d|--debug]: Prints commands in the output instead of executing it"
 	echo "	[-h|--help]: Prints this usage message"
 	echo "	[-w|--when PATTERN]: Define the time range to delete the containers. If no value is set '2 weeks' will be used"
   echo "	[-x|--excluded CONTAINER NAME]: Define which container name should be excluded from deletion. By default, registry will be never deleted"

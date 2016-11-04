@@ -6,7 +6,7 @@ WHEN="2 weeks"
 
 usage() {
 	echo "Please use this program with following input parameters:"
-	echo "	[-d|--debug]: Prints commands in the output"
+	echo "	[-d|--debug]: Prints commands in the output instead of executing it"
 	echo "	[-h|--help]: Prints this usage message"
 	echo "	[-i|--image IMAGE NAME]: Define which image names and tags should be deleted"
 	echo "	[-w|--when PATTERN]: Define the time range to delete the images. If no value is set '2 weeks' will be used"
