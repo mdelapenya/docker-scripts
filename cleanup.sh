@@ -62,16 +62,18 @@ done
 
 validate_image
 
+BASEDIR=$(dirname "$0")
+
 if [ "$DEBUG" = true ]; then
-  ./cleanup-containers.sh -d -w $WHEN -x $EXCLUDED
+  $BASEDIR/cleanup-containers.sh -d -w $WHEN -x $EXCLUDED
 
-  ./cleanup-images.sh -d -i $IMAGE -w "$WHEN"
+  $BASEDIR/cleanup-images.sh -d -i $IMAGE -w "$WHEN"
 
-  ./cleanup-orphan-images.sh -d
+  $BASEDIR/cleanup-orphan-images.sh -d
 else
-  ./cleanup-containers.sh -w $WHEN -x $EXCLUDED
+  $BASEDIR/cleanup-containers.sh -w $WHEN -x $EXCLUDED
 
-  ./cleanup-images.sh -i $IMAGE -w "$WHEN"
+  $BASEDIR/cleanup-images.sh -i $IMAGE -w "$WHEN"
 
-  ./cleanup-orphan-images.sh
+  $BASEDIR/cleanup-orphan-images.sh
 fi
